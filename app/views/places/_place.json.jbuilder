@@ -1,2 +1,8 @@
-json.extract! place, :id, :created_at, :updated_at
-json.url place_url(place, format: :json)
+json.id place.id
+json.trip_id place.trip_id
+json.address place.address
+json.name place.name
+json.description place.description
+json.image_url place.image_url
+json.start_time place.start_time
+json.end_time place.end_time
