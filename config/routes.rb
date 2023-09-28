@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   get "/trips" => "trips#index"
   get "/trips/:id" => "trips#show"
   post "/trips" => "trips#create"
+
+  #places routes
+  post "/places" => "places#create"
+
 end
