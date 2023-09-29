@@ -4,4 +4,6 @@ json.title trip.title
 json.image_url trip.image_url
 json.start_time trip.start_time.strftime("%D")
 json.end_time trip.end_time.strftime("%D")
-json.places trip.places
+json.places trip.places.map do |place|
+  json.partial! 'places/place', place: place
+end

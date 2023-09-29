@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post "/trips" => "trips#create"
 
   #places routes
+  get "/places" => "places#index"
+  get "/places/:id" => "places#show"
   post "/places" => "places#create"
 
 end
