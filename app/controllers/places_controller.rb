@@ -20,4 +20,10 @@ class PlacesController < ApplicationController
     )
     render :show
   end
+
+  def destroy
+    @place = Place.find_by(id:params[:id])
+    @place.destroy
+    render json: {message: "Place deleted"}
+  end
 end

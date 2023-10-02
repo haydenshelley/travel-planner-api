@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   #places routes
   get "/places" => "places#index"
-  get "/places/:id" => "places#show"
   post "/places" => "places#create"
+  delete "/places/:id" => "places#destroy"
 
 end
