@@ -7,3 +7,4 @@ json.end_time trip.end_time.strftime("%B %e, %Y")
 json.places trip.places.map do |place|
   json.partial! 'places/place', place: place
 end
+json.user trip.user
