@@ -21,6 +21,19 @@ class PlacesController < ApplicationController
     render :show
   end
 
+  def update
+    @place = Place.find_by(id: params[:id])
+    @place.update(
+      address: params[:address] || @place.address,
+      name: params[:name] || @place.name,
+      description: params[:description] || @place.description,
+      image_url: params[:image_url] || @place.image_url,
+      start_time: params[:start_time] || @place.start_time,
+      end_time: params[:end_time] || @place.end_time
+    )
+    render :show
+  end
+
   def destroy
     @place = Place.find_by(id:params[:id])
     @place.destroy
