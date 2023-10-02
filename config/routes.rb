@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   #trips routes
   get "/trips" => "trips#index"
-  get "/trips/:id" => "trips#show"
   post "/trips" => "trips#create"
+  get "/trips/:id" => "trips#show"
+  delete "/trips/:id" => "trips#destroy"
 
   #places routes
   get "/places" => "places#index"
