@@ -9,7 +9,19 @@ class PlacesController < ApplicationController
   end
 
   def recommendations
-    response = HTTP.get("https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:-118.343831,34.099079,5000&bias=proximity:-118.343831,34.099079&limit=20&apiKey=#{Rails.application.credentials.geoapify_api_key}")
+    location = params[:location]
+
+    location_response = HTTP.get("https://api.geoapify.com/v1/geocode/search?text=#{location}&apiKey=#{Rails.application.credentials.geoapify_api_key}")
+
+    # binding.pry
+    # render json: location_response.parse(:json)
+
+    longitude = location_response.parse(:json)["features"][0]["properties"]["lon"]
+    latitude = location_response.parse(:json)["features"][0]["properties"]["lat"]
+    proximity = params[:proximity]
+    category = params[:category]
+
+    response = HTTP.get("https://api.geoapify.com/v2/places?categories=#{category}&filter=circle:#{longitude},#{latitude},#{proximity}&bias=proximity:#{longitude},#{latitude}&limit=20&apiKey=#{Rails.application.credentials.geoapify_api_key}")
     render json: response.parse(:json)
   end
 
