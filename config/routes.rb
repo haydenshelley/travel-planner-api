@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   #places routes
   get "/places" => "places#index"
+  get "/places/recommendations" => "places#recommendations"
   post "/places" => "places#create"
   get "/places/:id" => "places#show"
   patch "/places/:id" => "places#update"

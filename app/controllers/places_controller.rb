@@ -8,6 +8,11 @@ class PlacesController < ApplicationController
     @place = Place.find_by(id: params[:id])
   end
 
+  def recommendations
+    response = HTTP.get("https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:-118.343831,34.099079,5000&bias=proximity:-118.343831,34.099079&limit=20&apiKey=#{Rails.application.credentials.geoapify_api_key}")
+    render json: response.parse(:json)
+  end
+
   def create
     @place = Place.create(
       trip_id: params[:trip_id],
