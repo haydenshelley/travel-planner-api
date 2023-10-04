@@ -21,7 +21,7 @@ class PlacesController < ApplicationController
     proximity = params[:proximity]
     category = params[:category]
 
-    response = HTTP.get("https://api.geoapify.com/v2/places?categories=#{category}&filter=circle:#{longitude},#{latitude},#{proximity}&bias=proximity:#{longitude},#{latitude}&limit=50&apiKey=#{Rails.application.credentials.geoapify_api_key}")
+    response = HTTP.get("https://api.geoapify.com/v2/places?categories=#{category}&filter=circle:#{longitude},#{latitude},#{proximity}&bias=proximity:#{longitude},#{latitude}&limit=25&apiKey=#{Rails.application.credentials.geoapify_api_key}")
     render json: response.parse(:json)
   end
 
