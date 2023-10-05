@@ -6,4 +6,5 @@ json.array!(@pending_trips) do |trip|
   json.image_url trip.image_url
   json.start_time trip.start_time.strftime("%B %e, %Y")
   json.end_time trip.end_time.strftime("%B %e, %Y")
+  json.travelers trip.travelers
 end
