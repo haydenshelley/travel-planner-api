@@ -28,4 +28,11 @@ class TravelersController < ApplicationController
 
     render json: {message: "Traveler deleted"}
   end
+
+  def pending
+    @user = User.find_by(id: current_user.id)
+    @pending_trip_ids = Traveler.pending_invitations(@user)
+    @pending_trips = Trip.where(id: @pending_trip_ids)
+    render json: @pending_trips, template: 'trips/pending_trips'
+  end
 end
