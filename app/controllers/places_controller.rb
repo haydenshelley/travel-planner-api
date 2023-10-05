@@ -1,5 +1,4 @@
 class PlacesController < ApplicationController
-  before_action :find_trip
   before_action :find_place, only: [:update, :destroy]
 
   def index
@@ -29,9 +28,10 @@ class PlacesController < ApplicationController
   end
 
   def create
+    @trip = Trip.find(params[:trip_id])
     @traveler = @trip.travelers.find_by(user_id: current_user.id)
 
-    if @traveler.admin
+    if @traveler&.admin?
       @place = Place.create(
         trip_id: params[:trip_id],
         address: params[:address],
@@ -42,15 +42,17 @@ class PlacesController < ApplicationController
         end_time: params[:end_time]
       )
       render :show
-    else
-      render json: { error: "Must be admin to create place"}
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
     end
   end
 
   def update
     @traveler = @trip.travelers.find_by(user_id: current_user.id)
 
-    if @traveler.admin
+    if @traveler&.admin?
       @place.update(
         address: params[:address] || @place.address,
         name: params[:name] || @place.name,
@@ -60,27 +62,28 @@ class PlacesController < ApplicationController
         end_time: params[:end_time] || @place.end_time
       )
       render :show
-    else
-      render json: { error: "Must be admin to update place"}
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
     end
   end
 
   def destroy
     @traveler = @trip.travelers.find_by(user_id: current_user.id)
-    if @traveler.admin
+    if @traveler&.admin?
       @place.destroy
       render json: {message: "Place deleted"}
-    else
-      render json: { error: "Must be admin to delete place"}
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
     end
   end
 
   private
-    def find_trip
-      @trip = Trip.find(params[:trip_id])
-    end
-
     def find_place
-      @place = @trip.places.find(params[:id])
+      @place = Place.find(params[:id])
+      @trip = @place.trip
     end
 end
