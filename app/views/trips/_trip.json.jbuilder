@@ -8,3 +8,4 @@ json.places trip.places.map do |place|
   json.partial! 'places/place', place: place
 end
 json.user trip.user
+json.travelers trip.travelers

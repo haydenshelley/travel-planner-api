@@ -17,6 +17,14 @@ class TripsController < ApplicationController
       start_time: params[:start_time],
       end_time: params[:end_time]
     )
+
+    @traveler = Traveler.create(
+      user_id: current_user.id,
+      trip_id: @trip.id,
+      admin: true,
+      accepted: true
+    )
+
     render :show
   end
 
