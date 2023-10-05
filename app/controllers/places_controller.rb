@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  before_action :find_place, only: [:update, :destroy]
+
   def index
     @places = Place.all
     render :index
@@ -26,34 +28,62 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.create(
-      trip_id: params[:trip_id],
-      address: params[:address],
-      name: params[:name],
-      description: params[:description],
-      image_url: params[:image_url],
-      start_time: params[:start_time],
-      end_time: params[:end_time]
-    )
-    render :show
+    @trip = Trip.find(params[:trip_id])
+    @traveler = @trip.travelers.find_by(user_id: current_user.id)
+
+    if @traveler&.admin?
+      @place = Place.create(
+        trip_id: params[:trip_id],
+        address: params[:address],
+        name: params[:name],
+        description: params[:description],
+        image_url: params[:image_url],
+        start_time: params[:start_time],
+        end_time: params[:end_time]
+      )
+      render :show
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
+    end
   end
 
   def update
-    @place = Place.find_by(id: params[:id])
-    @place.update(
-      address: params[:address] || @place.address,
-      name: params[:name] || @place.name,
-      description: params[:description] || @place.description,
-      image_url: params[:image_url] || @place.image_url,
-      start_time: params[:start_time] || @place.start_time,
-      end_time: params[:end_time] || @place.end_time
-    )
-    render :show
+    @traveler = @trip.travelers.find_by(user_id: current_user.id)
+
+    if @traveler&.admin?
+      @place.update(
+        address: params[:address] || @place.address,
+        name: params[:name] || @place.name,
+        description: params[:description] || @place.description,
+        image_url: params[:image_url] || @place.image_url,
+        start_time: params[:start_time] || @place.start_time,
+        end_time: params[:end_time] || @place.end_time
+      )
+      render :show
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
+    end
   end
 
   def destroy
-    @place = Place.find_by(id:params[:id])
-    @place.destroy
-    render json: {message: "Place deleted"}
+    @traveler = @trip.travelers.find_by(user_id: current_user.id)
+    if @traveler&.admin?
+      @place.destroy
+      render json: {message: "Place deleted"}
+    elsif @traveler.nil?
+      render json: { error: "User not added to this trip"}
+    elsif @traveler && !@traveler.admin
+      render json: { error: "User not admin on this trip"}
+    end
   end
+
+  private
+    def find_place
+      @place = Place.find(params[:id])
+      @trip = @place.trip
+    end
 end

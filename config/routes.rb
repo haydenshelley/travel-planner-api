@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   post "/users" => "users#create"
   post "/sessions" => "sessions#create"
 
+  #travelers routes associated with trips
+  resources :trips do
+    resources :travelers, only: [:create, :update, :destroy]
+  end
+  get "/invitations" => "travelers#pending"
+
   #trips routes
   get "/trips" => "trips#index"
   post "/trips" => "trips#create"
