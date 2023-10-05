@@ -33,6 +33,6 @@ class TravelersController < ApplicationController
     @user = User.find_by(id: current_user.id)
     @pending_trip_ids = Traveler.pending_invitations(@user)
     @pending_trips = Trip.where(id: @pending_trip_ids)
-    render json: @pending_trips, template: 'trips/pending_trips'
+    render template: 'trips/pending_trips', formats: [:json], handlers: [:jbuilder], locals: { pending_trips: @pending_trips }
   end
 end
