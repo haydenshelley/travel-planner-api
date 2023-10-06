@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   get "/tagalong" => "travelers#index"
   get "/invitations" => "travelers#pending"
+  delete "/invitations/decline" => "travelers#decline"
 
   #trips routes
   get "/trips" => "trips#index"

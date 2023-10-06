@@ -40,4 +40,11 @@ class TravelersController < ApplicationController
     @pending_trips = Trip.where(id: @pending_trip_ids)
     render template: 'trips/pending_trips', formats: [:json], handlers: [:jbuilder], locals: { pending_trips: @pending_trips }
   end
+
+  def decline
+    @traveler = Traveler.find_by(id: params[:traveler_id])
+    @traveler.destroy
+
+    render json: {message: "Traveler deleted"}
+  end
 end
