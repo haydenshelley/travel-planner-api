@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :trips do
     resources :travelers, only: [:create, :update, :destroy]
   end
+  get "/tagalong" => "travelers#index"
   get "/invitations" => "travelers#pending"
 
   #trips routes

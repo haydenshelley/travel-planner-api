@@ -1,4 +1,9 @@
 class TravelersController < ApplicationController
+  def index
+    @travelers = Traveler.joins(:trip).where(user_id: current_user.id, accepted: true).where.not(trips: {user_id: current_user.id})
+    render :index
+  end
+
   def create
     @trip = Trip.find(params[:trip_id])
     @traveler = @trip.travelers.create(
