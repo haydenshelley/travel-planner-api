@@ -4,6 +4,12 @@ class TravelersController < ApplicationController
     render :index
   end
 
+  def show
+    @travelers = Traveler.joins(:trip).where(user_id: current_user.id, accepted: true).where.not(trips: {user_id: current_user.id})
+    @traveler = @travelers.find_by(id: params[:id])
+    render :show
+  end
+
   def create
     @trip = Trip.find(params[:trip_id])
     @traveler = @trip.travelers.create(

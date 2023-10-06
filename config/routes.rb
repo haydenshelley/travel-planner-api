@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :travelers, only: [:create, :update, :destroy]
   end
   get "/tagalong" => "travelers#index"
+  get "/tagalong/:id" => "travelers#show"
   get "/invitations" => "travelers#pending"
   delete "/invitations/decline" => "travelers#decline"
 
