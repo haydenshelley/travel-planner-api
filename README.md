@@ -69,8 +69,6 @@ Now that you have installed and configured the application, you can start the de
 rails server
 ```
 
-This command will start the development server, and you should be able to access the Waypoints application in your web browser at 'http://localhost:5173'
-
 The Rails server will start, and the backend API will be accessible at 'http://localhost:3000'.
 
 Now, you should have the backend of the Waypoints Travel Planner application up and running on your local machine. The frontend can make requests to this API for data.
