@@ -15,9 +15,6 @@ class PlacesController < ApplicationController
 
     location_response = HTTP.get("https://api.geoapify.com/v1/geocode/search?text=#{location}&apiKey=#{Rails.application.credentials.geoapify_api_key}")
 
-    # binding.pry
-    # render json: location_response.parse(:json)
-
     longitude = location_response.parse(:json)["features"][0]["properties"]["lon"]
     latitude = location_response.parse(:json)["features"][0]["properties"]["lat"]
     proximity = params[:proximity]
