@@ -1,24 +1,77 @@
-# README
+# Waypoints - Travel Planner App (frontend)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Waypoints allows you to plan your trips, add travel plans, discover location-based recommendations, and collaberate with friends on trip planning. This README will guide you through setting up and running the backend of the application. For the frontend, please refer to the [Travel Planner Frontend README](https://github.com/haydenshelley/travel-planner-frontend) for instructions.
 
-Things you may want to cover:
+## Table of contents
 
-* Ruby version
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Usage](#usage)
+- [Configuration](#configuration)
 
-* System dependencies
+## Getting Started
 
-* Configuration
+### Before you begin, make sure you have the following installed:
 
-* Database creation
+- [Ruby](https://www.ruby-lang.org/)
+- [Ruby on Rails](https://rubyonrails.org/)
+- [Git](https://git-scm.com/)
 
-* Database initialization
+### Installation
 
-* How to run the test suite
+1. Clone the repository to your local machine:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+git clone https://github.com/haydenshelley/travel-planner-api
+```
 
-* Deployment instructions
+2. Navigate to the project directory:
 
-* ...
+```
+cd travel-planner-api
+```
+
+3. Install the required gems using Bundler:
+
+```
+bundle install
+```
+
+4. Create the database:
+
+```
+rails db:create
+```
+
+## Configuration
+
+To run the Waypoints backend, you will need API keys from [Geoapify Places API](https://www.geoapify.com/places-api) and [Geoapify Geocoding API](https://www.geoapify.com/geocoding-api). Please sign up for these API keys if you haven't already.
+
+1. Configure your api keys by creating a `.env` file in the project root:
+
+```
+touch .env
+```
+
+2. Open the `.env` file and add your api keys:
+
+```
+geoapify_api_key=YOUR_GEOAPIFY_API_KEY
+```
+
+Replace `YOUR_PLACES_API_KEY` with your actual API keys.
+
+## Running the Application
+
+Now that you have installed and configured the application, you can start the development server:
+
+```
+rails server
+
+```
+
+This command will start the development server, and you should be able to access the Waypoints application in your web browser at 'http://localhost:5173'
+
+The Rails server will start, and the backend API will be accessible at 'http://localhost:3000'.
+
+Now, you should have the backend of the Waypoints Travel Planner application up and running on your local machine. The frontend can make requests to this API for data.
