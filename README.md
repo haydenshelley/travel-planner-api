@@ -67,7 +67,6 @@ Now that you have installed and configured the application, you can start the de
 
 ```
 rails server
-
 ```
 
 This command will start the development server, and you should be able to access the Waypoints application in your web browser at 'http://localhost:5173'
