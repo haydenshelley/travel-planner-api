@@ -45,21 +45,21 @@ rails db:migrate
 
 ## Configuration
 
-To run the Waypoints backend, you will need API keys from [Geoapify Places API](https://www.geoapify.com/places-api) and [Geoapify Geocoding API](https://www.geoapify.com/geocoding-api). Please sign up for these API keys if you haven't already.
+To run the Waypoints backend, you will need an API key from [Geoapify Places API](https://www.geoapify.com/places-api). Please sign up for this API key if you haven't already.
 
-1. Configure your api keys by creating a `.env` file in the project root:
+1. Configure your api key by creating a `.env` file in the project root:
 
 ```
 touch .env
 ```
 
-2. Open the `.env` file and add your api keys:
+2. Open the `.env` file and add your api key:
 
 ```
 geoapify_api_key=YOUR_GEOAPIFY_API_KEY
 ```
 
-Replace `YOUR_PLACES_API_KEY` with your actual API keys.
+Replace `YOUR_GEOAPIFY_API_KEY` with your actual API key.
 
 ## Running the Application
 
