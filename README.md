@@ -5,9 +5,8 @@ Waypoints allows you to plan your trips, add travel plans, discover location-bas
 ## Table of contents
 
 - [Getting Started](#getting-started)
-- [Running the Application](#running-the-application)
-- [Usage](#usage)
 - [Configuration](#configuration)
+- [Running the Application](#running-the-application)
 
 ## Getting Started
 
