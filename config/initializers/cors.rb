@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:5173", "https://waypoints-hfeo.onrender.com"
+    origins "localhost:5173", "http://waypoints-hfeo.onrender.com"
     resource "*", headers: :any, methods: [:get, :post, :patch, :put, :delete]
   end
 end
