@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     render :index
   end
 
+  def current
+    @user = current_user
+    render :show
+  end
+
   def create
     user = User.new(
       name: params[:name],

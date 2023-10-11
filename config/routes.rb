@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # user authentication/login
   get "/users" => "users#index"
+  get "/current" => "users#current"
   post "/users" => "users#create"
   post "/sessions" => "sessions#create"
 
